@@ -1,0 +1,177 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/template/Layout.xhtml">
+
+	<ui:define name="content">
+			<div align="center" >
+		<h:form id="frm">
+				<p:tabView style="width: 1050px; margin:10px;" id="tabview">
+					<p:tab title="Informações Gerais">
+						<p:panelGrid styleClass="semBorda">
+						    <p:row>
+						        <p:column colspan="1">
+						        	<p:outputLabel for="nome" value="Nome" />
+						        </p:column>
+						        <p:column colspan="9">
+						        	<p:inputText id="nome" value="#{clienteController.pessoa.nome}" style="width: 98%;"/>
+						        </p:column>
+						        <p:column colspan="2">
+						        	<p:selectOneButton id="pessoa"
+										value="#{clienteController.pessoa.tipoPessoa}">
+										<f:selectItem itemLabel=" Física " itemValue="Física"/>
+										<f:selectItem itemLabel=" Jurídica " itemValue="Jurídica" />
+									</p:selectOneButton>
+						        </p:column>
+						    </p:row>
+						    <p:row>
+						    	<p:column>
+						        	<p:outputLabel value="Sexo" for="sexo" />
+						        </p:column>
+						        <p:column colspan="2">
+						        	<p:selectOneButton id="sexo"
+										value="#{clienteController.pessoa.pf.sexo}" >
+										<f:selectItem itemLabel=" Masc " itemValue="MASC" />
+										<f:selectItem itemLabel=" Fem " itemValue="FEMI" />
+									</p:selectOneButton>
+						        </p:column>
+						        <p:column>
+						        	<p:outputLabel id="nasc" value="Nasc" for="data-nasc" />
+						        </p:column>
+						        <p:column colspan="2">
+						        	<p:calendar pattern="dd-MM-yyyy" mask="true" id="data-nasc"
+										value="#{clienteController.pessoa.pf.dataNascimento}" size="10"/>
+						        </p:column>
+						        <p:column>
+						        	<p:outputLabel value="Ident." for="identidade" />
+						        </p:column>
+						        <p:column colspan="2">
+						        	<p:inputText id="identidade"
+										value="#{clienteController.pessoa.pf.identidade}" size="15"/>
+						        </p:column>
+						        <p:column>
+						        	<p:outputLabel value="Apelido" for="apelido" />
+						        </p:column>
+						        <p:column colspan="2">
+						        	<p:inputText id="apelido"
+										value="#{clienteController.pessoa.pf.apelido}" style="width: 98%;"/>
+						        </p:column>
+						    </p:row>
+						    <p:row>
+						    	<p:column colspan="1">
+						    		<p:outputLabel value="CNPJ" for="cnpj" />
+						    	</p:column>
+						    	<p:column colspan="2">
+						    		<p:inputMask mask="99.999.999/9999-99" id="cnpj"
+										value="#{clienteController.pessoa.pj.cnpj}" />
+						    	</p:column>
+						    	<p:column colspan="1">
+						    		<p:outputLabel for="fantasia" value="Fantasia" />
+						    	</p:column>
+						    	<p:column colspan="8">
+						    		<p:inputText id="fantasia" class="form-control"
+										value="#{clienteController.pessoa.pj.nomeFantasia}" style="width: 98%"/>
+						    	</p:column>
+						    </p:row>
+						    <p:row>
+						    	<p:column colspan="1">
+						    		<p:outputLabel value="CEP" for="cep" />
+						    	</p:column>
+						    	<!-- <p:column colspan="1">
+						    		<p:commandButton actionListener="#{clienteController.procurarCep()}" value="Procurar" update=":growl :frm"/>
+						    	</p:column> -->
+						    	<p:column colspan="2">
+						    		<p:inputMask mask="99.999-999" id="cep" class="form-control"
+										value="#{clienteController.pessoa.cep}" />
+						    	</p:column>
+						    	<p:column colspan="1">
+						    		<p:outputLabel for="logradouro" value="Endereço" />
+						    	</p:column>
+						    	<p:column colspan="6">
+						    		<p:inputText id="logradouro" class="form-control"
+										value="#{clienteController.pessoa.endereco}" style="width: 98%"/>
+								</p:column>
+						    	<p:column>
+						    		<p:outputLabel for="numero" value="Número" />
+						    	</p:column>
+						    	<p:column>
+						    		<p:inputText id="numero" class="form-control"
+										value="#{clienteController.pessoa.numero}" size="10" />
+						    	</p:column>
+						    </p:row>
+						    <p:row>
+						    	<p:column colspan="1">
+						    		<p:outputLabel value="Complem." for="complemento" />
+						    	</p:column>
+						    	<p:column colspan="2">
+						    		<p:inputText id="complemento" class="form-control"
+										value="#{clienteController.pessoa.complemento}" />
+						    	</p:column>
+						    	<p:column colspan="1">
+						    		<p:outputLabel value="Bairro" for="bairro" />
+						    	</p:column>
+						    	<p:column colspan="2">
+						    		<p:inputText id="bairro" class="form-control"
+										value="#{clienteController.pessoa.bairro}" size="10"/>
+						    	</p:column>
+						    	<p:column colspan="1">
+						    		<p:outputLabel value="Cidade" for="cidade" />
+						    	</p:column>
+						    	<p:column colspan="3">
+						    		<p:inputText id="cidade" class="form-control"
+										value="#{clienteController.pessoa.cidade}" style="width: 98%"/>
+						    	</p:column>
+						    	<p:column>
+						    		<p:outputLabel value="UF" for="uf" />
+						    	</p:column>
+						    	<p:column>
+						    		<p:inputText id="uf" class="form-control"
+										value="#{clienteController.pessoa.estado}" size="2" />
+						    	</p:column>
+						    </p:row>
+						   
+						</p:panelGrid>
+					</p:tab>
+					<p:tab title="Contatos">
+						<p:panelGrid styleClass="semBorda">
+							<p:row>
+								<p:column colspan="1">
+									<p:selectOneMenu id="tipoContato" style="width: 100px">
+							            <f:selectItem itemLabel="Telefone" itemValue="1"></f:selectItem>
+							            <f:selectItem itemLabel="E-mail"   itemValue="2"></f:selectItem>
+							        </p:selectOneMenu>
+								</p:column>
+								<p:column colspan="9">
+									<p:inputText id="contato" class="form-control"
+										value="#{clienteController.pessoa.contato.descricao}" style="width: 98%"/>
+								</p:column>
+								<p:column colspan="2">
+									<p:commandButton update=":growl" actionListener="#{clienteController.novoContato}" value="Adicionar" icon="ui-icon-check" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column colspan="12">
+									<p:dataTable var="listaContatos" value="#{clienteController.pessoa.contatos}" emptyMessage="Nenhum contato registrado.">
+									    <p:column headerText="Id">
+									        <h:outputText value="#{listaContatos.tipoContato}" />
+									    </p:column>
+									    <p:column headerText="Year">
+									        <h:outputText value="#{listaContatos.descricao}" />
+									    </p:column>
+									</p:dataTable>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:tab>
+					
+				</p:tabView>
+				<h:form>
+					<p:commandButton value="Gravar" icon="ui-icon-check" actionListener="#{clienteController.salvar()}" update=":growl :frm:tabview" />
+				</h:form>
+		</h:form>
+			</div>
+	</ui:define>
+</ui:composition>

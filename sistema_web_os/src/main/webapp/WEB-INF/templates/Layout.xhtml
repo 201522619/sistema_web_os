@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>SysOn |</title>
+
+	<h:outputStylesheet library="bootstrap" name="styles/bootstrap.min.css" />
+	<h:outputStylesheet library="bootstrap" name="styles/font-awesome.min.css" />
+	<h:outputStylesheet library="bootstrap" name="styles/prettify.min.css" />
+	<h:outputStylesheet library="bootstrap" name="styles/custom.css" />
+
+</h:head>
+
+<h:body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div class="left_col scroll-view">
+					<div class="navbar nav_title" style="border: 0;">
+						<a class="site_title"><i class="fa fa-cloud"></i> <span>SysOn</span></a>
+					</div>
+					<div class="clearfix"></div>
+					<p:growl id="msgs" showDetail="true"/>
+					<ui:include src="Profile.xhtml" />
+					<ui:include src="Menu.xhtml" />
+					<ui:include src="BotoesRodape.xhtml" />
+				</div>
+			</div>
+
+			<ui:include src="MenuSuperior.xhtml" />
+
+			<section class="aw-content  js-content">
+				<ui:insert name="content" />
+			</section>
+		</div>
+	</div>
+
+</h:body>
+</html>

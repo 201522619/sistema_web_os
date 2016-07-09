@@ -1,0 +1,5 @@
+package br.com.bara.sistema_os.application.controller;
+
+public class OrdemServicoController {
+
+}
