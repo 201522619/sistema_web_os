@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.bara.sistema_os.application.type.ESexo;
 

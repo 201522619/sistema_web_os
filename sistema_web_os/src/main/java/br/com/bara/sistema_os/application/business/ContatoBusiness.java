@@ -1,39 +1,65 @@
 package br.com.bara.sistema_os.application.business;
 
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.List;
 
+import br.com.bara.sistema_os.application.dao.ContatoDao;
 import br.com.bara.sistema_os.application.domain.Contato;
 
 
-public class ContatoBusiness  {
-
+public class ContatoBusiness  implements Serializable{
+	private static final long serialVersionUID = -7155457828133359696L;
+	
+	private ContatoDao contatoDao;
+	
+	public ContatoBusiness(){
+		this.contatoDao = new ContatoDao();
+	}
 	
 	public void salvar(List<Contato> contatos) {
 		for(Contato contato : contatos) {
-			for(Contato c: listarTodos()){
+			/*for(Contato c: listarTodos()){
 				if(contato.getDescricao().trim().equals(c.getDescricao().trim()) || contato.getId() == c.getId()){
 					c.setDescricao(contato.getDescricao());
 					salvarContato(c);
 					return;
 				}
 			}
+				Rever a lógica desse bloco
+			*/
 			salvarContato(contato);
 		}
 	}
 	
 	private void salvarContato(Contato contato){
+		try {
+			if(contato != null){
+				this.contatoDao.salvar(contato);
+			}else{
+				throw new RuntimeException("Contato is null: "+getClass());
+			}
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
-	public Collection<Contato> listarTodos() {
-		return null;
+	public List<Contato> listarTodos() {
+		return this.contatoDao.listarTodos();
 	}
 
 	public Contato procurarPeloID(Long id) {
-		return null;
+		return this.contatoDao.obterPorId(id);
 	}
 
-	public void remover(Contato contato) {
+	public void remover(Contato contato) {	
+		try {
+			if(contato != null){
+				this.contatoDao.deletar(contato.getId());
+			}else{
+				throw new RuntimeException("Não foi possível remover o contato! (Contato is null): "+getClass());
+			}
+		} catch (Exception e) {
+			throw e;
+		}
 	}
-
 }

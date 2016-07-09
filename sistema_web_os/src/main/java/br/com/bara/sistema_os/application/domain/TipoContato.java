@@ -20,7 +20,6 @@ import br.com.bara.sistema_os.application.type.ETipoContato;
 @Entity
 @Table(name = "tbl_tipo_contato")
 public class TipoContato implements Serializable{
-
 	private static final long serialVersionUID = -8521191621845795677L;
 	
 	@Id

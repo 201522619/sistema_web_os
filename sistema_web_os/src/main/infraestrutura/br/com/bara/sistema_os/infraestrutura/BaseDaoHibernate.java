@@ -32,11 +32,12 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 			manager.merge(entidade);
 			manager.getTransaction().commit();
 		} catch (RuntimeException e) {
-			if (manager.isOpen()) {
+			if (manager.isOpen() || manager.getTransaction().isActive()) {
 				manager.getTransaction().rollback();
 			}
 			throw e;
 		}finally {
+			manager.clear();
 			manager.close();
 		}
 	}
@@ -50,25 +51,42 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 			manager.remove(objeto);
 			manager.getTransaction().commit();
 		} catch (RuntimeException e) {
-			if (manager.isOpen()) {
+			if (manager.isOpen() || manager.getTransaction().isActive()) {
 				manager.getTransaction().rollback();
 			}	
 			throw e;
 		}finally {
+			manager.clear();
 			manager.close();
 		}
 	}
 
 	@Override
 	public List<E> listarTodos() {
-		CriteriaQuery<E> query = manager.getCriteriaBuilder().createQuery(entidadeClasse);
-		query.from(entidadeClasse);
-		return manager.createQuery(query).getResultList();
+		try {
+			manager = EntityManagerProducer.getEntityManager();
+			CriteriaQuery<E> query = manager.getCriteriaBuilder().createQuery(entidadeClasse);
+			query.from(entidadeClasse);
+			return manager.createQuery(query).getResultList();
+		} catch (RuntimeException e) {
+			throw e;
+		}finally{
+			manager.clear();
+			manager.close();
+		}
 	}
 
 	@Override
 	public E obterPorId(Long id) {
-		return manager.find(entidadeClasse, id);
+		try {
+			manager = EntityManagerProducer.getEntityManager();
+			return manager.find(entidadeClasse, id);
+		} catch (RuntimeException e) {
+			throw e;
+		}finally{
+			manager.clear();
+			manager.close();
+		}
 	}
 
 }

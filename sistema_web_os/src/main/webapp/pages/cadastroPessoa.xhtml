@@ -146,7 +146,7 @@
 								</p:column>
 								<p:column colspan="9">
 									<p:inputText id="contato" class="form-control"
-										value="#{clienteController.pessoa.contato.descricao}" style="width: 98%"/>
+										value="#{clienteController.contato.descricao}" style="width: 98%"/>
 								</p:column>
 								<p:column colspan="2">
 									<p:commandButton update=":growl" actionListener="#{clienteController.novoContato}" value="Adicionar" icon="ui-icon-check" />
@@ -154,7 +154,7 @@
 							</p:row>
 							<p:row>
 								<p:column colspan="12">
-									<p:dataTable var="listaContatos" value="#{clienteController.pessoa.contatos}" emptyMessage="Nenhum contato registrado.">
+									<p:dataTable var="listaContatos" value="#{clienteController.listarTodosContatos}" emptyMessage="Nenhum contato registrado.">
 									    <p:column headerText="Id">
 									        <h:outputText value="#{listaContatos.tipoContato}" />
 									    </p:column>

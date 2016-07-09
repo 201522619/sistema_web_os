@@ -16,14 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.bara.sistema_os.application.type.EStatus;
-
-
-
 
 @Entity
 @Table(name = "tbl_pessoa")
@@ -64,10 +58,10 @@ public class Pessoa implements Serializable{
 	//@NotEmpty(message = "O CEP é obrigatório!")
 	private String cep;
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToOne(fetch = FetchType.EAGER)
 	private PessoaFisica pf;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToOne(fetch = FetchType.EAGER)
 	private PessoaJuridica pj;
 
 	@Enumerated(EnumType.STRING)
@@ -77,24 +71,23 @@ public class Pessoa implements Serializable{
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", targetEntity = Contato.class)
 	private List<Contato> contatos;
 	
-	@Transient
-	private Contato contato;
+	//private Contato contato;
 	
 	public Pessoa(){
 		this.pf = new PessoaFisica();
 		this.pj = new PessoaJuridica();
-		this.contato = new Contato();
+		//this.contato = new Contato();
 		this.contatos = new ArrayList<Contato>();
 	}
 	
-	public Contato getContato() {
+	/*public Contato getContato() {
 		return contato;
 	}
 
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-
+*/
 	public String getNome() {
 		return nome;
 	}
@@ -207,6 +200,14 @@ public class Pessoa implements Serializable{
 		this.id = id;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", nome=" + nome + ", tipoPessoa="
+				+ tipoPessoa + ", endereco=" + endereco + ", numero=" + numero
+				+ ", complemento=" + complemento + ", bairro=" + bairro
+				+ ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep
+				+ ", pf=" + pf + ", pj=" + pj + ", status=" + status
+				+ ", contatos=" + contatos + "]";
+	}
 	
 }
