@@ -11,7 +11,7 @@
 		<h:form id="frm">
 				<p:tabView style="width: 1050px; margin:10px;" id="tabview">
 					<p:tab title="Informações Gerais">
-						<p:panelGrid styleClass="semBorda">
+						<p:panelGrid styleClass="semBorda" id="pnlPessoa">
 						    <p:row>
 						        <p:column colspan="1">
 						        	<p:outputLabel for="nome" value="Nome" />
@@ -24,16 +24,17 @@
 										value="#{clienteController.pessoa.tipoPessoa}">
 										<f:selectItem itemLabel=" Física " itemValue="Física"/>
 										<f:selectItem itemLabel=" Jurídica " itemValue="Jurídica" />
+										<p:ajax event="change" update="pnlPessoa" process="pessoa"/> 
 									</p:selectOneButton>
 						        </p:column>
 						    </p:row>
-						    <p:row>
+						    <p:row rendered="#{clienteController.pessoa.tipoPessoa=='Física'}">
 						    	<p:column>
 						        	<p:outputLabel value="Sexo" for="sexo" />
 						        </p:column>
 						        <p:column colspan="2">
 						        	<p:selectOneButton id="sexo"
-										value="#{clienteController.pessoa.pf.sexo}" >
+										value="" >
 										<f:selectItem itemLabel=" Masc " itemValue="MASC" />
 										<f:selectItem itemLabel=" Fem " itemValue="FEMI" />
 									</p:selectOneButton>
@@ -42,38 +43,33 @@
 						        	<p:outputLabel id="nasc" value="Nasc" for="data-nasc" />
 						        </p:column>
 						        <p:column colspan="2">
-						        	<p:calendar pattern="dd-MM-yyyy" mask="true" id="data-nasc"
-										value="#{clienteController.pessoa.pf.dataNascimento}" size="10"/>
+						        	<p:calendar pattern="dd-MM-yyyy" mask="true" id="data-nasc" size="10"/>
 						        </p:column>
 						        <p:column>
 						        	<p:outputLabel value="Ident." for="identidade" />
 						        </p:column>
 						        <p:column colspan="2">
-						        	<p:inputText id="identidade"
-										value="#{clienteController.pessoa.pf.identidade}" size="15"/>
+						        	<p:inputText id="identidade" size="15"/>
 						        </p:column>
 						        <p:column>
 						        	<p:outputLabel value="Apelido" for="apelido" />
 						        </p:column>
 						        <p:column colspan="2">
-						        	<p:inputText id="apelido"
-										value="#{clienteController.pessoa.pf.apelido}" style="width: 98%;"/>
+						        	<p:inputText id="apelido" style="width: 98%;"/>
 						        </p:column>
 						    </p:row>
-						    <p:row>
+						    <p:row rendered="#{clienteController.pessoa.tipoPessoa=='Jurídica'}">
 						    	<p:column colspan="1">
 						    		<p:outputLabel value="CNPJ" for="cnpj" />
 						    	</p:column>
 						    	<p:column colspan="2">
-						    		<p:inputMask mask="99.999.999/9999-99" id="cnpj"
-										value="#{clienteController.pessoa.pj.cnpj}" />
+						    		<p:inputMask mask="99.999.999/9999-99" id="cnpj" />
 						    	</p:column>
 						    	<p:column colspan="1">
 						    		<p:outputLabel for="fantasia" value="Fantasia" />
 						    	</p:column>
 						    	<p:column colspan="8">
-						    		<p:inputText id="fantasia" class="form-control"
-										value="#{clienteController.pessoa.pj.nomeFantasia}" style="width: 98%"/>
+						    		<p:inputText id="fantasia" class="form-control" style="width: 98%"/>
 						    	</p:column>
 						    </p:row>
 						    <p:row>
@@ -138,29 +134,28 @@
 					<p:tab title="Contatos">
 						<p:panelGrid styleClass="semBorda">
 							<p:row>
-								<p:column colspan="1">
-									<p:selectOneMenu id="tipoContato" style="width: 100px">
-							            <f:selectItem itemLabel="Telefone" itemValue="1"></f:selectItem>
-							            <f:selectItem itemLabel="E-mail"   itemValue="2"></f:selectItem>
-							        </p:selectOneMenu>
-								</p:column>
-								<p:column colspan="9">
-									<p:inputText id="contato" class="form-control"
-										value="#{clienteController.contato.descricao}" style="width: 98%"/>
-								</p:column>
-								<p:column colspan="2">
-									<p:commandButton update=":growl" actionListener="#{clienteController.novoContato}" value="Adicionar" icon="ui-icon-check" />
-								</p:column>
-							</p:row>
-							<p:row>
 								<p:column colspan="12">
-									<p:dataTable var="listaContatos" value="#{clienteController.listarTodosContatos}" emptyMessage="Nenhum contato registrado.">
-									    <p:column headerText="Id">
-									        <h:outputText value="#{listaContatos.tipoContato}" />
-									    </p:column>
-									    <p:column headerText="Year">
-									        <h:outputText value="#{listaContatos.descricao}" />
-									    </p:column>
+									<p:dataTable id="tblContatos" var="item" value="#{clienteController.pessoa.contatos}" emptyMessage="Nenhum contato registrado.">
+									    <p:column headerText="Tipo" width="100">
+										<p:selectOneMenu id="tipo" value="#{item.tipoContato}">
+											<f:selectItem itemLabel="Selecione" />
+											<f:selectItems value="#{clienteController.contato.tiposContato}" />
+										</p:selectOneMenu>
+								    	</p:column>
+								    	<p:column headerText="Descrição">
+								    		<h:inputText value="#{item.descricao}"/>
+								    	</p:column>
+								    	<p:column headerText="Ação" width="30">
+								    		<p:commandButton 
+								    			process="@this"
+								    			icon="ui-icon-closethick" 
+								    			title="Excluir" 
+								    			action="#{clienteController.pessoa.removerContato(item)}" 
+								    			update="tblContatos"/>
+								    	</p:column>
+								    	<f:facet name="footer">
+								    		<p:commandButton value="Adicionar Contato" actionListener="#{clienteController.pessoa.adicionarNovoContato}" update="tblContatos"/>
+								    	</f:facet>
 									</p:dataTable>
 								</p:column>
 							</p:row>

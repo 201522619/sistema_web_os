@@ -15,7 +15,6 @@ import br.com.bara.sistema_os.application.business.WebServiceCEPBusiness;
 import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.Pessoa;
 import br.com.bara.sistema_os.application.domain.TipoContato;
-import br.com.bara.sistema_os.application.type.ETipoContato;
 import br.com.bara.sistema_os.util.FacesUtil;
 
 @ManagedBean
@@ -103,29 +102,10 @@ public class ClienteController implements Serializable {
 	
 	private void consistirParaSalvar() {
 		try {
-			novoContato();
 			clienteBusiness.consistirParaSalvar(pessoa);
 		} catch (RuntimeException e) {
 			throw e;
 		}
-	}
-
-	public void novoContato(){
-		try {
-			/*
-			 * Mudar os dados estáticos para dinâmicos de acordo com o formulário
-			 */
-			this.tipoContato.setDescricao(ETipoContato.TELEFONE);
-			this.contato.setPessoa(pessoa);
-			this.contato.setDescricao("62 3555-4455");
-			this.contato.setTipoContato(tipoContato);
-			this.pessoa.getContatos().add(this.contato);
-			this.tipoContato.setContatos(this.pessoa.getContatos());
-		} catch (RuntimeException e) {
-			FacesUtil.mensagemErro(e.getMessage());
-			e.printStackTrace();
-		}
-		
 	}
 	
 	public void procurarCep(){

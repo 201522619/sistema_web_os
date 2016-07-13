@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.bara.sistema_os.application.type.EStatus;
@@ -58,12 +56,6 @@ public class Pessoa implements Serializable{
 	//@NotEmpty(message = "O CEP é obrigatório!")
 	private String cep;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	private PessoaFisica pf;
-
-	@OneToOne(fetch = FetchType.EAGER)
-	private PessoaJuridica pj;
-
 	@Enumerated(EnumType.STRING)
 	@Column(name = "p_status")
 	private EStatus status;
@@ -71,23 +63,9 @@ public class Pessoa implements Serializable{
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", targetEntity = Contato.class)
 	private List<Contato> contatos;
 	
-	//private Contato contato;
-	
 	public Pessoa(){
-		this.pf = new PessoaFisica();
-		this.pj = new PessoaJuridica();
-		//this.contato = new Contato();
-		this.contatos = new ArrayList<Contato>();
 	}
 	
-	/*public Contato getContato() {
-		return contato;
-	}
-
-	public void setContato(Contato contato) {
-		this.contato = contato;
-	}
-*/
 	public String getNome() {
 		return nome;
 	}
@@ -176,22 +154,6 @@ public class Pessoa implements Serializable{
 		this.tipoPessoa = tipoPessoa;
 	}
 
-	public PessoaFisica getPf() {
-		return pf;
-	}
-
-	public void setPf(PessoaFisica pf) {
-		this.pf = pf;
-	}
-
-	public PessoaJuridica getPj() {
-		return pj;
-	}
-
-	public void setPj(PessoaJuridica pj) {
-		this.pj = pj;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -200,13 +162,31 @@ public class Pessoa implements Serializable{
 		this.id = id;
 	}
 
+	public void adicionarNovoContato() {
+		try {
+			if (this.contatos == null) {
+				this.contatos = new ArrayList<Contato>();
+			}
+
+			Contato novoContato = new Contato();
+			novoContato.setPessoa(this);
+			this.contatos.add(novoContato);
+		} catch (RuntimeException e) {
+			throw new RuntimeException(e.getMessage());
+		}		
+	}
+
+	public void removerContato(Contato contato) {
+		this.contatos.remove(contato);
+	}
+	
 	@Override
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", tipoPessoa="
 				+ tipoPessoa + ", endereco=" + endereco + ", numero=" + numero
 				+ ", complemento=" + complemento + ", bairro=" + bairro
 				+ ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep
-				+ ", pf=" + pf + ", pj=" + pj + ", status=" + status
+				+ ", status=" + status
 				+ ", contatos=" + contatos + "]";
 	}
 	
