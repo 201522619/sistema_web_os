@@ -13,12 +13,8 @@
 					<p:tab title="Informações Gerais">
 						<p:panelGrid styleClass="semBorda" id="pnlPessoa">
 						    <p:row>
-						        <p:column colspan="1">
-						        	<p:outputLabel for="nome" value="Nome" />
-						        </p:column>
-						        <p:column colspan="9">
-						        	<p:inputText id="nome" value="#{clienteController.pessoa.nome}" style="width: 98%;"/>
-						        </p:column>
+						    <p:column colspan="1">
+						    </p:column>
 						        <p:column colspan="2">
 						        	<p:selectOneButton id="pessoa"
 										value="#{clienteController.pessoa.tipoPessoa}">
@@ -27,14 +23,19 @@
 										<p:ajax event="change" update="pnlPessoa" process="pessoa"/> 
 									</p:selectOneButton>
 						        </p:column>
+						        <p:column colspan="1">
+						        	<p:outputLabel for="nome" value="Nome" />
+						        </p:column>
+						        <p:column colspan="5">
+						        	<p:inputText id="nome" value="#{clienteController.pessoa.nome}" style="width: 98%;"/>
+						        </p:column>
 						    </p:row>
 						    <p:row rendered="#{clienteController.pessoa.tipoPessoa=='Física'}">
 						    	<p:column>
 						        	<p:outputLabel value="Sexo" for="sexo" />
 						        </p:column>
 						        <p:column colspan="2">
-						        	<p:selectOneButton id="sexo"
-										value="" >
+						        	<p:selectOneButton id="sexo" value="#{clienteController.pessoa.tipoPessoa}">
 										<f:selectItem itemLabel=" Masc " itemValue="MASC" />
 										<f:selectItem itemLabel=" Fem " itemValue="FEMI" />
 									</p:selectOneButton>
@@ -143,7 +144,7 @@
 										</p:selectOneMenu>
 								    	</p:column>
 								    	<p:column headerText="Descrição">
-								    		<h:inputText value="#{item.descricao}"/>
+								    		<p:inputText value="#{item.descricao}" style="width: 100%;"/>
 								    	</p:column>
 								    	<p:column headerText="Ação" width="30">
 								    		<p:commandButton 

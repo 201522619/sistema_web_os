@@ -2,6 +2,7 @@ package br.com.bara.sistema_os.application.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -51,7 +52,7 @@ public class Pessoa implements Serializable{
 
 	@Column(name = "p_estado")
 	private String estado;
-
+	
 	@Column(name = "p_cep")
 	//@NotEmpty(message = "O CEP é obrigatório!")
 	private String cep;
