@@ -39,6 +39,7 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 		}finally {
 			manager.clear();
 			manager.close();
+			EntityManagerProducer.closeEntityManager();
 		}
 	}
 
@@ -58,6 +59,7 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 		}finally {
 			manager.clear();
 			manager.close();
+			EntityManagerProducer.closeEntityManager();
 		}
 	}
 
@@ -73,6 +75,7 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 		}finally{
 			manager.clear();
 			manager.close();
+			EntityManagerProducer.closeEntityManager();
 		}
 	}
 
@@ -86,6 +89,7 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 		}finally{
 			manager.clear();
 			manager.close();
+			EntityManagerProducer.closeEntityManager();
 		}
 	}
 

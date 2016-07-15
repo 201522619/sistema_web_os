@@ -137,26 +137,32 @@
 							<p:row>
 								<p:column colspan="12">
 									<p:dataTable id="tblContatos" var="item" value="#{clienteController.pessoa.contatos}" emptyMessage="Nenhum contato registrado.">
+									
 									    <p:column headerText="Tipo" width="100">
+									    
 										<p:selectOneMenu id="tipo" value="#{item.tipoContato}">
 											<f:selectItem itemLabel="Selecione" />
 											<f:selectItems value="#{clienteController.contato.tiposContato}" />
 										</p:selectOneMenu>
 								    	</p:column>
+								    	
 								    	<p:column headerText="Descrição">
 								    		<p:inputText value="#{item.descricao}" style="width: 100%;"/>
 								    	</p:column>
+								    	
 								    	<p:column headerText="Ação" width="30">
 								    		<p:commandButton 
 								    			process="@this"
 								    			icon="ui-icon-closethick" 
 								    			title="Excluir" 
-								    			action="#{clienteController.pessoa.removerContato(item)}" 
+								    			actionListener="#{clienteController.pessoa.removerContato(item)}" 
 								    			update="tblContatos"/>
 								    	</p:column>
+								    	
 								    	<f:facet name="footer">
 								    		<p:commandButton value="Adicionar Contato" actionListener="#{clienteController.pessoa.adicionarNovoContato}" update="tblContatos"/>
 								    	</f:facet>
+								    	
 									</p:dataTable>
 								</p:column>
 							</p:row>
