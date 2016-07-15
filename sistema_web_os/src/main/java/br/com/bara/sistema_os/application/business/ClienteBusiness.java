@@ -7,6 +7,7 @@ import br.com.bara.sistema_os.application.dao.PessoaDao;
 import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.Pessoa;
 import br.com.bara.sistema_os.application.domain.TipoContato;
+import br.com.bara.sistema_os.application.type.EStatus;
 
 public class ClienteBusiness implements Serializable{
 
@@ -48,20 +49,30 @@ public class ClienteBusiness implements Serializable{
 
 	public void salvarPessoa(Pessoa pessoa) {
 		try {
-			for(Contato contato : pessoa.getContatos()){
-				for(TipoContato tipoContato : this.tipoContatoBusiness.listarTodos()){
-					if(contato.getTipoContato().getDescricao() != tipoContato.getDescricao()){
-						this.tipoContatoBusiness.salvar(contato.getTipoContato());
-					}else{
-						throw new RuntimeException("Já possui esse tipo de contato salvo no banco de dados! Por favor informe outro tipo de contato!");
-					}
-				}
-			}
-			this.contatoBusiness.salvar(pessoa.getContatos());
-			//this.pessoaDao.salvar(pessoa);
+			pessoa.setStatus(EStatus.ATIVO);
+			consistirTipoContato(pessoa);
+			this.pessoaDao.salvar(pessoa);
 		}  catch (RuntimeException e) {
 			System.out.println(e.getMessage() + " Causa: "+e.getCause());
 			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	private void consistirTipoContato(Pessoa pessoa){
+		try {
+			if(pessoa.getContatos() != null){
+				for(Contato contato : pessoa.getContatos()){
+					for(TipoContato tipoContato : this.tipoContatoBusiness.listarTodos()){
+						if(contato.getTipoContato().getDescricao() != tipoContato.getDescricao()){
+							this.tipoContatoBusiness.salvar(contato.getTipoContato());
+						}else{
+							throw new RuntimeException("Já possui esse tipo de contato salvo no banco de dados! Por favor informe outro tipo de contato!");
+						}
+					}
+				}
+			}
+		} catch (RuntimeException e) {
+			throw e;
 		}
 	}
 	

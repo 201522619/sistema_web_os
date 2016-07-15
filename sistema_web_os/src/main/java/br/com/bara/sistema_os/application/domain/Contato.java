@@ -2,7 +2,6 @@ package br.com.bara.sistema_os.application.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +28,7 @@ public class Contato implements Serializable{
 	@Column(name = "cont_descricao")
 	private String descricao;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pessoa_id", nullable = false)
 	private Pessoa pessoa;
 	

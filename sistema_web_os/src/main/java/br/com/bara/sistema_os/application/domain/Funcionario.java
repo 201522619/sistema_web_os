@@ -34,14 +34,6 @@ public class Funcionario implements Serializable{
 	@Column(name = "fun_data_exclusao")
 	private Date dataExcluxao;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pessoa_fisica_id", nullable = true)
-	private PessoaFisica pessoaFisica;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pessoa_juridica_id", nullable = true)
-	private PessoaJuridica pessoaJuridica;
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "status_funcionario_id", nullable = false)
 	private StatusFuncionario statusFuncionario;
@@ -59,22 +51,6 @@ public class Funcionario implements Serializable{
 	inverseJoinColumns = {@JoinColumn(name = "funcionario_id")})
 	private List<Cargo> cargos;
 	
-	public PessoaFisica getPessoaFisica() {
-		return pessoaFisica;
-	}
-
-	public void setPessoaFisica(PessoaFisica pessoaFisica) {
-		this.pessoaFisica = pessoaFisica;
-	}
-
-	public PessoaJuridica getPessoaJuridica() {
-		return pessoaJuridica;
-	}
-
-	public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-		this.pessoaJuridica = pessoaJuridica;
-	}
-
 	public StatusFuncionario getStatusFuncionario() {
 		return statusFuncionario;
 	}
