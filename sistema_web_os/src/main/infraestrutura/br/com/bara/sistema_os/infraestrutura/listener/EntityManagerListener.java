@@ -1,4 +1,4 @@
-package listener;
+package br.com.bara.sistema_os.infraestrutura.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
