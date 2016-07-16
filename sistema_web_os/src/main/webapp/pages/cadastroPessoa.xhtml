@@ -35,7 +35,7 @@
 						        	<p:outputLabel value="Sexo" for="sexo" />
 						        </p:column>
 						        <p:column colspan="2">
-						        	<p:selectOneButton id="sexo" value="#{clienteController.pessoa.tipoPessoa}">
+						        	<p:selectOneButton id="sexo">
 										<f:selectItem itemLabel=" Masc " itemValue="MASC" />
 										<f:selectItem itemLabel=" Fem " itemValue="FEMI" />
 									</p:selectOneButton>
@@ -140,9 +140,8 @@
 									
 									    <p:column headerText="Tipo" width="100">
 									    
-										<p:selectOneMenu id="tipo" value="#{item.tipoContato}">
-											<f:selectItem itemLabel="Selecione" />
-											<f:selectItems value="#{clienteController.contato.tiposContato}" />
+										<p:selectOneMenu value="#{item.tipoContato}" converter="contatoConverter" >
+											<f:selectItems value="#{item.tiposContato}" var="con" itemLabel="#{con.tipoContato}" itemValue="#{con}" />
 										</p:selectOneMenu>
 								    	</p:column>
 								    	

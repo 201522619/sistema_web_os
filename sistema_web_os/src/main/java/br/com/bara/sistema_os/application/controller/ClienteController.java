@@ -81,25 +81,6 @@ public class ClienteController implements Serializable {
 		}
 	}
 
-	private void consistirParaEditar() {
-		try {
-			clienteBusiness.consistirParaEditar(pessoa);
-		} catch (RuntimeException e) {
-			FacesUtil.mensagemErro(e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
-	public void editar(){
-		try {
-			consistirParaEditar();
-			FacesUtil.mensagemInfo("Cliente "+pessoa.getNome()+" atualizado com sucesso!");
-		} catch (Exception e) {
-			FacesUtil.mensagemErro(e.getMessage());
-			e.printStackTrace();
-		}
-	}
-	
 	private void consistirParaSalvar() {
 		try {
 			clienteBusiness.consistirParaSalvar(pessoa);

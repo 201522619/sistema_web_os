@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+
 public class EntityManagerProducer {
 	
 	private static final String PERSISTENCE_UNIT = "sistema_web_os";

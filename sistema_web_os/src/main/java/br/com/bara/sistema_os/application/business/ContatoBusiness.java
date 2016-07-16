@@ -18,15 +18,6 @@ public class ContatoBusiness  implements Serializable{
 	
 	public void salvar(List<Contato> contatos) {
 		for(Contato contato : contatos) {
-			/*for(Contato c: listarTodos()){
-				if(contato.getDescricao().trim().equals(c.getDescricao().trim()) || contato.getId() == c.getId()){
-					c.setDescricao(contato.getDescricao());
-					salvarContato(c);
-					return;
-				}
-			}
-				Rever a lógica desse bloco
-			*/
 			salvarContato(contato);
 		}
 	}
@@ -54,7 +45,7 @@ public class ContatoBusiness  implements Serializable{
 	public void remover(Contato contato) {	
 		try {
 			if(contato != null){
-				this.contatoDao.deletar(contato.getId());
+				this.contatoDao.remover(contato.getId());
 			}else{
 				throw new RuntimeException("Não foi possível remover o contato! (Contato is null): "+getClass());
 			}

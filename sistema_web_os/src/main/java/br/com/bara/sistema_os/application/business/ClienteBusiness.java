@@ -7,7 +7,6 @@ import br.com.bara.sistema_os.application.dao.PessoaDao;
 import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.Pessoa;
 import br.com.bara.sistema_os.application.domain.TipoContato;
-import br.com.bara.sistema_os.application.type.EStatus;
 
 public class ClienteBusiness implements Serializable{
 
@@ -31,14 +30,6 @@ public class ClienteBusiness implements Serializable{
 		}
 	}
 	
-	public void consistirParaEditar(Pessoa pessoa) {
-		try {
-			salvarPessoa(pessoa);
-		} catch (RuntimeException e) {
-			throw new RuntimeException(e.getMessage());
-		}
-	}
-	
 	public List<Pessoa> listarTodos() {
 		try {
 			return this.pessoaDao.listarTodos();
@@ -49,9 +40,8 @@ public class ClienteBusiness implements Serializable{
 
 	public void salvarPessoa(Pessoa pessoa) {
 		try {
-			pessoa.setStatus(EStatus.ATIVO);
-			consistirTipoContato(pessoa);
 			this.pessoaDao.salvar(pessoa);
+			consistirTipoContato(pessoa);
 		}  catch (RuntimeException e) {
 			System.out.println(e.getMessage() + " Causa: "+e.getCause());
 			throw new RuntimeException(e.getMessage());
@@ -70,6 +60,7 @@ public class ClienteBusiness implements Serializable{
 						}
 					}
 				}
+				this.contatoBusiness.salvar(pessoa.getContatos());
 			}
 		} catch (RuntimeException e) {
 			throw e;

@@ -6,7 +6,7 @@ public interface BaseDao<E> {
 
 	void salvar(E entidade);
 	
-	void deletar(Long id);
+	void remover(Long id);
 
 	List<E> listarTodos();
 

@@ -36,7 +36,7 @@ public class TipoContatoBusiness implements Serializable{
 	public void remover(TipoContato tipoContato) {
 		try {
 			if(tipoContato != null){
-				this.tipoContatoDao.deletar(tipoContato.getId());
+				this.tipoContatoDao.remover(tipoContato.getId());
 			}else{
 				throw new RuntimeException("TipoContato is null: "+getClass());
 			}

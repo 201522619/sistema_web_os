@@ -39,12 +39,11 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 		}finally {
 			manager.clear();
 			manager.close();
-			EntityManagerProducer.closeEntityManager();
 		}
 	}
 
 	@Override
-	public void deletar(Long id) {
+	public void remover(Long id) {
 		try {
 			manager = EntityManagerProducer.getEntityManager();
 			manager.getTransaction().begin();
@@ -59,7 +58,6 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 		}finally {
 			manager.clear();
 			manager.close();
-			EntityManagerProducer.closeEntityManager();
 		}
 	}
 
@@ -75,7 +73,6 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 		}finally{
 			manager.clear();
 			manager.close();
-			EntityManagerProducer.closeEntityManager();
 		}
 	}
 
@@ -89,7 +86,6 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 		}finally{
 			manager.clear();
 			manager.close();
-			EntityManagerProducer.closeEntityManager();
 		}
 	}
 
