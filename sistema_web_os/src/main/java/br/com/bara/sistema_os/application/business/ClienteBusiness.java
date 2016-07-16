@@ -51,15 +51,6 @@ public class ClienteBusiness implements Serializable{
 	private void consistirTipoContato(Pessoa pessoa){
 		try {
 			if(pessoa.getContatos() != null){
-				for(Contato contato : pessoa.getContatos()){
-					for(TipoContato tipoContato : this.tipoContatoBusiness.listarTodos()){
-						if(contato.getTipoContato().getDescricao() != tipoContato.getDescricao()){
-							this.tipoContatoBusiness.salvar(contato.getTipoContato());
-						}else{
-							throw new RuntimeException("Já possui esse tipo de contato salvo no banco de dados! Por favor informe outro tipo de contato!");
-						}
-					}
-				}
 				this.contatoBusiness.salvar(pessoa.getContatos());
 			}
 		} catch (RuntimeException e) {

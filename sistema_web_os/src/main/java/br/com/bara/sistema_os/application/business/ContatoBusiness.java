@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.bara.sistema_os.application.dao.ContatoDao;
 import br.com.bara.sistema_os.application.domain.Contato;
+import br.com.bara.sistema_os.application.domain.TipoContato;
 
 
 public class ContatoBusiness  implements Serializable{
@@ -12,12 +13,22 @@ public class ContatoBusiness  implements Serializable{
 	
 	private ContatoDao contatoDao;
 	
+	private TipoContatoBusiness tipoContatoBusiness;
+	
 	public ContatoBusiness(){
 		this.contatoDao = new ContatoDao();
+		this.tipoContatoBusiness = new TipoContatoBusiness();
 	}
 	
 	public void salvar(List<Contato> contatos) {
 		for(Contato contato : contatos) {
+			for(TipoContato tipoContato : this.tipoContatoBusiness.listarTodos()){
+				if(contato.getTipoContato().getDescricao() != tipoContato.getDescricao()){
+					this.tipoContatoBusiness.salvar(contato.getTipoContato());
+				}else{
+					throw new RuntimeException("Já possui esse tipo de contato salvo no banco de dados! Por favor informe outro tipo de contato!");
+				}
+			}
 			salvarContato(contato);
 		}
 	}

@@ -14,6 +14,7 @@ import org.omnifaces.util.Messages;
 
 import br.com.bara.sistema_os.application.business.ClienteBusiness;
 import br.com.bara.sistema_os.application.business.ContatoBusiness;
+import br.com.bara.sistema_os.application.business.TipoContatoBusiness;
 import br.com.bara.sistema_os.application.business.WebServiceCEPBusiness;
 import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.Pessoa;
@@ -31,6 +32,8 @@ public class ClienteController implements Serializable {
 	private TipoContato tipoContato;
 	private ClienteBusiness clienteBusiness;
 	private ContatoBusiness contatoBusiness;
+	private TipoContatoBusiness tipoContatoBusiness;
+	private List<TipoContato> tipoContatoList;
 	
 	@PostConstruct
 	public void init(){
@@ -39,8 +42,20 @@ public class ClienteController implements Serializable {
 		this.contato = new Contato();
 		this.tipoContato = new TipoContato();
 		this.contatoBusiness = new ContatoBusiness();
+		this.tipoContatoBusiness = new TipoContatoBusiness();
 	}
 	
+	public List<TipoContato> getTipoContatoList() {
+		if(this.tipoContatoList == null){
+			this.tipoContatoList = tipoContatoBusiness.listarTodos();
+		}
+		return tipoContatoList;
+	}
+
+	public void setTipoContatoList(List<TipoContato> tipoContatoList) {
+		this.tipoContatoList = tipoContatoList;
+	}
+
 	public List<Contato> getlistarTodosContatos() {
 		return this.contatoBusiness.listarTodos();
 	}

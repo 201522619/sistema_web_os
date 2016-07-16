@@ -1,7 +1,6 @@
 package br.com.bara.sistema_os.application.business;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 import br.com.bara.sistema_os.application.dao.TipoContatoDao;
@@ -29,7 +28,7 @@ public class TipoContatoBusiness implements Serializable{
 		}
 	}
 
-	public Collection<TipoContato> listarTodos() {
+	public List<TipoContato> listarTodos() {
 		return this.tipoContatoDao.listarTodos();
 	}
 
@@ -51,15 +50,6 @@ public class TipoContatoBusiness implements Serializable{
 	
 	public void consistirAntesDeSalvar(List<Contato> contatos){
 		for(Contato c : contatos){
-			/*for(TipoContato tc : listarTodos()){
-				if(c.getTipoContato().getDescricao().equals(tc.getDescricao()) || c.getTipoContato().getId() == tc.getId()){
-					//c.setTipoContato(tc);
-					//salvar(c.getTipoContato());
-					return;
-				}
-			}
-				Verifica a necessidade da utilização desse bloco de instrução
-			*/
 			salvar(c.getTipoContato());
 		}
 	}
