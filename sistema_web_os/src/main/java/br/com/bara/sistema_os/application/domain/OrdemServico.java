@@ -6,9 +6,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -17,13 +14,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_ordem_servico")
-public class OrdemServico implements Serializable{
+public class OrdemServico extends GenericEntity implements Serializable{
 
 	private static final long serialVersionUID = 6980028505250705014L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 	
 	@Column(name = "os_data_gerada")
 	private Date dataGerada;
@@ -70,14 +64,4 @@ public class OrdemServico implements Serializable{
 	public void setOrdemServicoItems(List<OrdemServicoItem> ordemServicoItems) {
 		this.ordemServicoItems = ordemServicoItems;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	
 }

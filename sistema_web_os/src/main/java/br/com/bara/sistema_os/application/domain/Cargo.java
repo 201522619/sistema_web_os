@@ -7,9 +7,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,14 +19,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "tbl_cargo")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "cargo")
-public class Cargo implements Serializable{
+public class Cargo extends GenericEntity implements Serializable {
 
 	private static final long serialVersionUID = -2015940680833155008L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
 	@Column(name = "perf_descricao")
 	private String descricao;
 	
@@ -59,14 +52,6 @@ public class Cargo implements Serializable{
 
 	public void setPermissoes(List<Permissao> permissoes) {
 		this.permissoes = permissoes;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Date getDataInicial() {

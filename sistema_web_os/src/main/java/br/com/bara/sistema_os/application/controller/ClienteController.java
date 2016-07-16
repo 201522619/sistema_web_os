@@ -10,6 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.omnifaces.util.Messages;
+
 import br.com.bara.sistema_os.application.business.ClienteBusiness;
 import br.com.bara.sistema_os.application.business.ContatoBusiness;
 import br.com.bara.sistema_os.application.business.WebServiceCEPBusiness;
@@ -94,10 +96,10 @@ public class ClienteController implements Serializable {
 				FacesUtil.mensagemErro(e.getMessage());
 				return;
 			}
-			FacesUtil.mensagemInfo("Cliente "+pessoa.getNome()+" cadastrado com sucesso!");
+			Messages.addGlobalInfo("Cliente "+pessoa.getNome()+" cadastrado com sucesso!");
 		} catch (RuntimeException e) {
 			e.printStackTrace();
-			FacesUtil.mensagemErro(e.getMessage());
+			Messages.addGlobalError(e.getMessage());
 		}
 	}
 

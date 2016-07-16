@@ -6,23 +6,16 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "tbl_objeto")
-public class Objeto implements Serializable{
+public class Objeto extends GenericEntity implements Serializable{
 
 	private static final long serialVersionUID = 3101579128688610761L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
 	@Column(name = "obj_marca")
 	private String marca;
 
@@ -66,15 +59,4 @@ public class Objeto implements Serializable{
 	public void setOrdemServicoItems(List<OrdemServicoItem> ordemServicoItems) {
 		this.ordemServicoItems = ordemServicoItems;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	
-
 }

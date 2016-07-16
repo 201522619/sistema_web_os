@@ -7,9 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,14 +16,10 @@ import br.com.bara.sistema_os.application.type.EStatus;
 
 @Entity
 @Table(name = "tbl_ordem_servico_item")
-public class OrdemServicoItem implements Serializable{
+public class OrdemServicoItem extends GenericEntity implements Serializable{
 
 	private static final long serialVersionUID = 3505170149061945029L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
 	@Column(name = "os_item_garantia")
 	private boolean garantia;
 
@@ -142,14 +135,6 @@ public class OrdemServicoItem implements Serializable{
 
 	public void setStatus(EStatus status) {
 		this.status = status;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	/*public Status getStatus() {

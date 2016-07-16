@@ -6,22 +6,15 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "tbl_status_funcionario")
-public class StatusFuncionario implements Serializable{
+public class StatusFuncionario extends GenericEntity implements Serializable{
 
 	private static final long serialVersionUID = 7901086432290552292L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 	
 	@Column(name = "sf_descricao")
 	private String descricao;
@@ -46,15 +39,5 @@ public class StatusFuncionario implements Serializable{
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	
 
 }

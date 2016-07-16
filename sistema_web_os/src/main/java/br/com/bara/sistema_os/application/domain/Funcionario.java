@@ -6,9 +6,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -20,14 +17,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_funcionario")
-public class Funcionario implements Serializable{
+public class Funcionario extends GenericEntity implements Serializable{
 
 	private static final long serialVersionUID = 6971886953333306565L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
 	@Column(name = "fun_data_criacao")
 	private Date dataCriacao;
 	
@@ -98,15 +91,5 @@ public class Funcionario implements Serializable{
 	public void setCargos(List<Cargo> cargos) {
 		this.cargos = cargos;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	
 
 }

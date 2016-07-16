@@ -3,21 +3,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_pagamento")
-public class Pagamento implements Serializable{
+public class Pagamento extends GenericEntity implements Serializable{
 
 	private static final long serialVersionUID = -5891665093238486680L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
 	private Date dataVencimento;
 
 	private Date dataPagamento;

@@ -5,23 +5,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "tbl_usuario")
-public class Usuario implements Serializable {
+public class Usuario extends GenericEntity implements Serializable {
 
 	private static final long serialVersionUID = 4370449561443997113L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-
 	@Column(name = "usu_data_criacao")
 	private Date dataCriacao;
 
@@ -80,14 +72,6 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public Configuracao getConfiguracao() {
 		return configuracao;
 	}
@@ -95,6 +79,5 @@ public class Usuario implements Serializable {
 	public void setConfiguracao(Configuracao configuracao) {
 		this.configuracao = configuracao;
 	}
-
 	
 }
