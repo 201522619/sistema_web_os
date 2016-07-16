@@ -13,5 +13,5 @@ public enum ETipoContato {
 	public String getTipoContato() {
 		return tipoContato;
 	}
-
+	
 }

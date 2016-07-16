@@ -1,6 +1,7 @@
 package br.com.bara.sistema_os.application.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +66,25 @@ public class ClienteController implements Serializable {
 	public void setTipoContato(TipoContato tipoContato) {
 		this.tipoContato = tipoContato;
 	}
+	
+	public void adicionarNovoContato() {
+		try {
+			if (pessoa.getContatos() == null) {
+				this.pessoa.setContatos(new ArrayList<Contato>());
+			}
+
+			Contato novoContato = new Contato();
+			novoContato.setPessoa(pessoa);
+			this.pessoa.getContatos().add(novoContato);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		}		
+	}
+
+	public void removerContato(Contato contato) {
+		this.pessoa.getContatos().remove(contato);
+	}
 
 	public void salvar(){
 		try {
@@ -76,8 +96,8 @@ public class ClienteController implements Serializable {
 			}
 			FacesUtil.mensagemInfo("Cliente "+pessoa.getNome()+" cadastrado com sucesso!");
 		} catch (RuntimeException e) {
-			FacesUtil.mensagemErro(e.getMessage());
 			e.printStackTrace();
+			FacesUtil.mensagemErro(e.getMessage());
 		}
 	}
 
@@ -85,6 +105,7 @@ public class ClienteController implements Serializable {
 		try {
 			clienteBusiness.consistirParaSalvar(pessoa);
 		} catch (RuntimeException e) {
+			e.printStackTrace();
 			throw e;
 		}
 	}

@@ -140,8 +140,8 @@
 									
 									    <p:column headerText="Tipo" width="100">
 									    
-										<p:selectOneMenu value="#{item.tipoContato}" converter="contatoConverter" >
-											<f:selectItems value="#{item.tiposContato}" var="con" itemLabel="#{con.tipoContato}" itemValue="#{con}" />
+										<p:selectOneMenu value="#{item.tipoContato}" converter="contatoConverter">
+											<f:selectItems value="#{item.tiposContato}" var="con" itemLabel="#{con.descricao}" itemValue="#{con}" />
 										</p:selectOneMenu>
 								    	</p:column>
 								    	
@@ -154,12 +154,12 @@
 								    			process="@this"
 								    			icon="ui-icon-closethick" 
 								    			title="Excluir" 
-								    			actionListener="#{clienteController.pessoa.removerContato(item)}" 
+								    			actionListener="#{clienteController.removerContato(item)}" 
 								    			update="tblContatos"/>
 								    	</p:column>
 								    	
 								    	<f:facet name="footer">
-								    		<p:commandButton value="Adicionar Contato" actionListener="#{clienteController.pessoa.adicionarNovoContato}" update="tblContatos"/>
+								    		<p:commandButton value="Adicionar Contato" actionListener="#{clienteController.adicionarNovoContato}" update="tblContatos"/>
 								    	</f:facet>
 								    	
 									</p:dataTable>
