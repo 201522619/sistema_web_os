@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.com.bara.sistema_os.application.dao.PessoaDao;
-import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.Pessoa;
-import br.com.bara.sistema_os.application.domain.TipoContato;
 
 public class ClienteBusiness implements Serializable{
 
@@ -14,17 +12,19 @@ public class ClienteBusiness implements Serializable{
 
 	private PessoaDao pessoaDao;
 	private ContatoBusiness contatoBusiness;
-	private TipoContatoBusiness tipoContatoBusiness;
 	
 	public ClienteBusiness(){
 		this.pessoaDao = new PessoaDao();
 		this.contatoBusiness = new ContatoBusiness();
-		this.tipoContatoBusiness = new TipoContatoBusiness();
 	}
 	
 	public void consistirParaSalvar(Pessoa pessoa) {
 		try {
-			salvarPessoa(pessoa);
+			if(pessoa != null){
+				salvarPessoa(pessoa);
+			}else{
+				throw new RuntimeException("Pessoa is Null "+getClass().getSimpleName());
+			}
 		} catch (RuntimeException e) {
 			throw new RuntimeException(e.getMessage());
 		}
@@ -43,7 +43,6 @@ public class ClienteBusiness implements Serializable{
 			this.pessoaDao.salvar(pessoa);
 			consistirTipoContato(pessoa);
 		}  catch (RuntimeException e) {
-			System.out.println(e.getMessage() + " Causa: "+e.getCause());
 			throw new RuntimeException(e.getMessage());
 		}
 	}
@@ -52,6 +51,8 @@ public class ClienteBusiness implements Serializable{
 		try {
 			if(pessoa.getContatos() != null){
 				this.contatoBusiness.salvar(pessoa.getContatos());
+			}else{
+				throw new RuntimeException("List of the contatos is null "+getClass().getSimpleName());
 			}
 		} catch (RuntimeException e) {
 			throw e;

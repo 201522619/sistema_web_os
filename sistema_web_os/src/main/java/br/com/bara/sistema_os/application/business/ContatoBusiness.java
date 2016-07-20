@@ -5,7 +5,6 @@ import java.util.List;
 
 import br.com.bara.sistema_os.application.dao.ContatoDao;
 import br.com.bara.sistema_os.application.domain.Contato;
-import br.com.bara.sistema_os.application.domain.TipoContato;
 
 
 public class ContatoBusiness  implements Serializable{
@@ -22,24 +21,30 @@ public class ContatoBusiness  implements Serializable{
 	
 	public void salvar(List<Contato> contatos) {
 		for(Contato contato : contatos) {
+			consistirTipocontato(contato);
+			salvarContato(contato);
+		}
+	}
+	
+	private void consistirTipocontato(Contato contato){
+		/*if(this.tipoContatoBusiness.listarTodos() != null){
 			for(TipoContato tipoContato : this.tipoContatoBusiness.listarTodos()){
-				if(contato.getTipoContato().getDescricao() != tipoContato.getDescricao()){
+				if(contato.getTipoContato().getTipoContato() != tipoContato.getDescricao().getTipoContato()){
 					this.tipoContatoBusiness.salvar(contato.getTipoContato());
 				}else{
 					throw new RuntimeException("Já possui esse tipo de contato salvo no banco de dados! Por favor informe outro tipo de contato!");
 				}
 			}
-			salvarContato(contato);
-		}
+		}else{
+			this.tipoContatoBusiness.salvar(contato.getTipoContato());
+		}*/
+		this.tipoContatoBusiness.salvar(contato.getTipoContato());
 	}
 	
 	private void salvarContato(Contato contato){
 		try {
-			if(contato != null){
-				this.contatoDao.salvar(contato);
-			}else{
-				throw new RuntimeException("Contato is null: "+getClass());
-			}
+			
+			this.contatoDao.salvar(contato);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -58,7 +63,7 @@ public class ContatoBusiness  implements Serializable{
 			if(contato != null){
 				this.contatoDao.remover(contato.getId());
 			}else{
-				throw new RuntimeException("Não foi possível remover o contato! (Contato is null): "+getClass());
+				throw new RuntimeException("Não foi possível remover o contato! (Contato is null): "+getClass().getSimpleName());
 			}
 		} catch (Exception e) {
 			throw e;

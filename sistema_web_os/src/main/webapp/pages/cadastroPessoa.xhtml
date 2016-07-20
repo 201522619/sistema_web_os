@@ -142,7 +142,7 @@
 									    
 										<p:selectOneMenu value="#{item.tipoContato}" converter="omnifaces.SelectItemsConverter">
 											<f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
-											<f:selectItems value="#{item.tiposContato}" var="con" itemLabel="#{con.descricao}" itemValue="#{con}" />
+											<f:selectItems value="#{item.tiposContato}" var="con" itemLabel="#{con.tipoContato}" itemValue="#{con}" />
 										</p:selectOneMenu>
 								    	</p:column>
 								    	

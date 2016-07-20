@@ -6,22 +6,27 @@ import java.util.List;
 import br.com.bara.sistema_os.application.dao.TipoContatoDao;
 import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.TipoContato;
+import br.com.bara.sistema_os.application.type.ETipoContato;
 
 public class TipoContatoBusiness implements Serializable{
 	private static final long serialVersionUID = 40899736028913075L;
 	
 	private TipoContatoDao tipoContatoDao;
 	
+	private TipoContato tipoContato;
+	
 	public TipoContatoBusiness(){
+		this.tipoContato = new TipoContato();
 		this.tipoContatoDao = new TipoContatoDao();
 	}
 
-	public void salvar(TipoContato tipoContato) {
+	public void salvar(ETipoContato eTipoContato) {
 		try {
-			if(tipoContato != null){
+			if(eTipoContato != null){
+				this.tipoContato.setDescricao(eTipoContato);
 				this.tipoContatoDao.salvar(tipoContato);
 			}else{
-				throw new RuntimeException("TipoContato is null: "+getClass());
+				throw new RuntimeException("TipoContato is null: "+getClass().getSimpleName());
 			}
 		} catch (RuntimeException e) {
 			throw e;
@@ -37,7 +42,7 @@ public class TipoContatoBusiness implements Serializable{
 			if(tipoContato != null){
 				this.tipoContatoDao.remover(tipoContato.getId());
 			}else{
-				throw new RuntimeException("TipoContato is null: "+getClass());
+				throw new RuntimeException("TipoContato is null: "+getClass().getSimpleName());
 			}
 		} catch (RuntimeException e) {
 			throw e;

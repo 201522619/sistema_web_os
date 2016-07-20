@@ -1,7 +1,6 @@
 package br.com.bara.sistema_os.application.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,22 +21,17 @@ public class Contato extends GenericEntity implements Serializable{
 	private String descricao;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "pessoa_id", nullable = false)
+	@JoinColumn(name = "pessoa_id", nullable = true)
 	private Pessoa pessoa;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "tipo_contato_id", nullable = false)
-	private TipoContato tipoContato;
+	/*@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "tipo_contato_id", nullable = true)
+	private TipoContato tipoContato;*/
 	
-	public ArrayList<TipoContato> getTiposContato() {
-		ArrayList<TipoContato> tipoContatos = new ArrayList<TipoContato>();
-		TipoContato tc = new TipoContato();
-		tc.setDescricao(ETipoContato.TELEFONE.toString());
-		tipoContatos.add(tc);
-		TipoContato tc2 = new TipoContato();
-		tc2.setDescricao(ETipoContato.EMAIL.toString());
-		tipoContatos.add(tc2);
-        return tipoContatos;
+	private ETipoContato tipoContato;
+	
+	public ETipoContato[] getTiposContato() {
+		return ETipoContato.values();
     }
 	
 	public String getDescricao() {
@@ -56,13 +50,23 @@ public class Contato extends GenericEntity implements Serializable{
 		this.pessoa = pessoa;
 	}
 
-	public TipoContato getTipoContato() {
+	public ETipoContato getTipoContato() {
+		return tipoContato;
+	}
+
+	public void setTipoContato(ETipoContato tipoContato) {
+		this.tipoContato = tipoContato;
+	}
+	
+	
+
+	/*public TipoContato getTipoContato() {
 		return tipoContato;
 	}
 
 	public void setTipoContato(TipoContato tipoContato) {
 		this.tipoContato = tipoContato;
-	}
+	}*/
 
 	
 }

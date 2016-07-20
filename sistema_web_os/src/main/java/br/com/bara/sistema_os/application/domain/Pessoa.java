@@ -55,9 +55,6 @@ public class Pessoa extends GenericEntity implements Serializable{
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pessoa", targetEntity = Contato.class)
 	private List<Contato> contatos;
 	
-	public Pessoa(){
-	}
-	
 	public String getNome() {
 		return nome;
 	}

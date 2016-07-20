@@ -34,6 +34,7 @@ public class ClienteController implements Serializable {
 	private ContatoBusiness contatoBusiness;
 	private TipoContatoBusiness tipoContatoBusiness;
 	private List<TipoContato> tipoContatoList;
+	private List<Contato> contatos;
 	
 	@PostConstruct
 	public void init(){
@@ -57,7 +58,14 @@ public class ClienteController implements Serializable {
 	}
 
 	public List<Contato> getlistarTodosContatos() {
-		return this.contatoBusiness.listarTodos();
+		if(this.contatos == null){
+			this.contatos = this.contatoBusiness.listarTodos();
+		}
+		return this.contatos;
+	}
+	
+	public void setListaContatos(Contato contato){
+		this.contato = contato;
 	}
 
 	public Pessoa getPessoa() {
@@ -89,18 +97,20 @@ public class ClienteController implements Serializable {
 			if (pessoa.getContatos() == null) {
 				this.pessoa.setContatos(new ArrayList<Contato>());
 			}
-
-			Contato novoContato = new Contato();
-			novoContato.setPessoa(pessoa);
-			this.pessoa.getContatos().add(novoContato);
+			
+			contato.setPessoa(pessoa);
+			pessoa.getContatos().add(contato);
+			
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
-		}		
+		}finally{
+			contato = new Contato();
+		}
 	}
 
 	public void removerContato(Contato contato) {
-		this.pessoa.getContatos().remove(contato);
+		pessoa.getContatos().remove(contato);
 	}
 
 	public void salvar(){
