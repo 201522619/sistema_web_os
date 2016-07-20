@@ -14,11 +14,9 @@ import org.omnifaces.util.Messages;
 
 import br.com.bara.sistema_os.application.business.ClienteBusiness;
 import br.com.bara.sistema_os.application.business.ContatoBusiness;
-import br.com.bara.sistema_os.application.business.TipoContatoBusiness;
 import br.com.bara.sistema_os.application.business.WebServiceCEPBusiness;
 import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.Pessoa;
-import br.com.bara.sistema_os.application.domain.TipoContato;
 import br.com.bara.sistema_os.util.FacesUtil;
 
 @ManagedBean
@@ -29,11 +27,8 @@ public class ClienteController implements Serializable {
 
 	private Pessoa pessoa;
 	private Contato contato;
-	private TipoContato tipoContato;
 	private ClienteBusiness clienteBusiness;
 	private ContatoBusiness contatoBusiness;
-	private TipoContatoBusiness tipoContatoBusiness;
-	private List<TipoContato> tipoContatoList;
 	private List<Contato> contatos;
 	
 	@PostConstruct
@@ -41,22 +36,9 @@ public class ClienteController implements Serializable {
 		this.pessoa = new Pessoa();
 		this.clienteBusiness = new ClienteBusiness();
 		this.contato = new Contato();
-		this.tipoContato = new TipoContato();
 		this.contatoBusiness = new ContatoBusiness();
-		this.tipoContatoBusiness = new TipoContatoBusiness();
 	}
 	
-	public List<TipoContato> getTipoContatoList() {
-		if(this.tipoContatoList == null){
-			this.tipoContatoList = tipoContatoBusiness.listarTodos();
-		}
-		return tipoContatoList;
-	}
-
-	public void setTipoContatoList(List<TipoContato> tipoContatoList) {
-		this.tipoContatoList = tipoContatoList;
-	}
-
 	public List<Contato> getlistarTodosContatos() {
 		if(this.contatos == null){
 			this.contatos = this.contatoBusiness.listarTodos();
@@ -84,14 +66,6 @@ public class ClienteController implements Serializable {
 		this.contato = contato;
 	}
 
-	public TipoContato getTipoContato() {
-		return tipoContato;
-	}
-
-	public void setTipoContato(TipoContato tipoContato) {
-		this.tipoContato = tipoContato;
-	}
-	
 	public void adicionarNovoContato() {
 		try {
 			if (pessoa.getContatos() == null) {
@@ -100,12 +74,12 @@ public class ClienteController implements Serializable {
 			
 			contato.setPessoa(pessoa);
 			pessoa.getContatos().add(contato);
-			
+			contato = new Contato();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		}finally{
-			contato = new Contato();
+			
 		}
 	}
 

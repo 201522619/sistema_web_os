@@ -40,6 +40,7 @@ public class ClienteBusiness implements Serializable{
 
 	public void salvarPessoa(Pessoa pessoa) {
 		try {
+			//Aqui precisa de uma transação generica
 			this.pessoaDao.salvar(pessoa);
 			consistirTipoContato(pessoa);
 		}  catch (RuntimeException e) {

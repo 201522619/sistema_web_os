@@ -5,7 +5,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.com.bara.sistema_os.application.domain.TipoContato;
+import br.com.bara.sistema_os.application.type.ETipoContato;
 
 @FacesConverter(value = "contatoConverter")
 public class ContatoConverter implements Converter{
@@ -29,7 +29,7 @@ public class ContatoConverter implements Converter{
 			if (value == null) {
 				return "";
 			}
-			return String.valueOf(((TipoContato) value).getDescricao());
+			return String.valueOf(((ETipoContato) value).getTipoContato());
 		} catch (RuntimeException e) {
 			throw e;
 		}

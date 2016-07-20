@@ -57,16 +57,6 @@ public class Contato extends GenericEntity implements Serializable{
 	public void setTipoContato(ETipoContato tipoContato) {
 		this.tipoContato = tipoContato;
 	}
-	
-	
-
-	/*public TipoContato getTipoContato() {
-		return tipoContato;
-	}
-
-	public void setTipoContato(TipoContato tipoContato) {
-		this.tipoContato = tipoContato;
-	}*/
-
+		
 	
 }
