@@ -3,20 +3,22 @@ package br.com.bara.sistema_os.application.business;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import br.com.bara.sistema_os.application.dao.PessoaDao;
 import br.com.bara.sistema_os.application.domain.Pessoa;
 
+@Named
 public class ClienteBusiness implements Serializable{
 
 	private static final long serialVersionUID = 6951385777723359664L;
-
-	private PessoaDao pessoaDao;
-	private ContatoBusiness contatoBusiness;
 	
-	public ClienteBusiness(){
-		this.pessoaDao = new PessoaDao();
-		this.contatoBusiness = new ContatoBusiness();
-	}
+	@Inject
+	private PessoaDao pessoaDao;
+	
+	@Inject
+	private ContatoBusiness contatoBusiness;
 	
 	public void consistirParaSalvar(Pessoa pessoa) {
 		try {

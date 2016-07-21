@@ -2,32 +2,31 @@ package br.com.bara.sistema_os.application.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.Pessoa;
 
+@Named
+@ViewScoped
 public class PesquisaClienteController implements Serializable {
 
 	private static final long serialVersionUID = -7669892764774083935L;
 
-	private List<Pessoa> pessoas;
+	@Inject
+	private ArrayList<Pessoa> pessoas;
 
+	@Inject
 	private Contato contato;
 
-	@PostConstruct
-	public void init() {
-		pessoas = new ArrayList<Pessoa>();
-		contato = new Contato();
-	}
-
-	public List<Pessoa> getPessoas() {
+	public ArrayList<Pessoa> getPessoas() {
 		return pessoas;
 	}
 
-	public void setPessoas(List<Pessoa> pessoas) {
+	public void setPessoas(ArrayList<Pessoa> pessoas) {
 		this.pessoas = pessoas;
 	}
 

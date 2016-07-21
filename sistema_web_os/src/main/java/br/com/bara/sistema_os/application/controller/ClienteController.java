@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
 
@@ -19,25 +19,25 @@ import br.com.bara.sistema_os.application.domain.Contato;
 import br.com.bara.sistema_os.application.domain.Pessoa;
 import br.com.bara.sistema_os.util.FacesUtil;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class ClienteController implements Serializable {
 
 	private static final long serialVersionUID = 5322504104014116091L;
 
+	@Inject
 	private Pessoa pessoa;
-	private Contato contato;
-	private ClienteBusiness clienteBusiness;
-	private ContatoBusiness contatoBusiness;
-	private List<Contato> contatos;
 	
-	@PostConstruct
-	public void init(){
-		this.pessoa = new Pessoa();
-		this.clienteBusiness = new ClienteBusiness();
-		this.contato = new Contato();
-		this.contatoBusiness = new ContatoBusiness();
-	}
+	@Inject
+	private Contato contato;
+	
+	@Inject
+	private ClienteBusiness clienteBusiness;
+	
+	@Inject
+	private ContatoBusiness contatoBusiness;
+	
+	private List<Contato> contatos;
 	
 	public List<Contato> getlistarTodosContatos() {
 		if(this.contatos == null){

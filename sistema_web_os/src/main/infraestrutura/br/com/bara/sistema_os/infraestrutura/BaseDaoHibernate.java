@@ -3,13 +3,17 @@ package br.com.bara.sistema_os.infraestrutura;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
+@Named
 public class BaseDaoHibernate<E> implements BaseDao<E> {
 
 	private Class<E> entidadeClasse;
 
+	@Inject
 	private EntityManager manager;
 	
 	@SuppressWarnings({ "unchecked"})
