@@ -8,8 +8,10 @@ import javax.inject.Named;
 
 import br.com.bara.sistema_os.application.dao.PessoaDao;
 import br.com.bara.sistema_os.application.domain.Pessoa;
+import br.com.bara.sistema_os.infraestrutura.interceptor.Transactional;
 
 @Named
+@Transactional(readOnly = true)
 public class ClienteBusiness implements Serializable{
 
 	private static final long serialVersionUID = 6951385777723359664L;
@@ -40,9 +42,9 @@ public class ClienteBusiness implements Serializable{
 		}
 	}
 
+	@Transactional(readOnly = false)
 	public void salvarPessoa(Pessoa pessoa) {
 		try {
-			//Aqui precisa de uma transação generica
 			this.pessoaDao.salvar(pessoa);
 			consistirTipoContato(pessoa);
 		}  catch (RuntimeException e) {

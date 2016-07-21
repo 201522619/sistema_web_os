@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.bara.sistema_os.application.domain.Contato;
@@ -16,10 +15,8 @@ public class PesquisaClienteController implements Serializable {
 
 	private static final long serialVersionUID = -7669892764774083935L;
 
-	@Inject
 	private ArrayList<Pessoa> pessoas;
 
-	@Inject
 	private Contato contato;
 
 	public ArrayList<Pessoa> getPessoas() {
