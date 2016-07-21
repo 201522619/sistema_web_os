@@ -31,66 +31,39 @@ public class BaseDaoHibernate<E> implements BaseDao<E> {
 	@Override
 	public void salvar(E entidade) {
 		try {
-			manager = EntityManagerProducer.getEntityManager();
-			manager.getTransaction().begin();
 			manager.merge(entidade);
-			manager.getTransaction().commit();
 		} catch (RuntimeException e) {
-			if (manager.isOpen() || manager.getTransaction().isActive()) {
-				manager.getTransaction().rollback();
-			}
 			throw e;
-		}finally {
-			manager.clear();
-			manager.close();
 		}
 	}
 
 	@Override
 	public void remover(Long id) {
 		try {
-			manager = EntityManagerProducer.getEntityManager();
-			manager.getTransaction().begin();
 			E objeto = obterPorId(id);
 			manager.remove(objeto);
-			manager.getTransaction().commit();
 		} catch (RuntimeException e) {
-			if (manager.isOpen() || manager.getTransaction().isActive()) {
-				manager.getTransaction().rollback();
-			}	
 			throw e;
-		}finally {
-			manager.clear();
-			manager.close();
 		}
 	}
 
 	@Override
 	public List<E> listarTodos() {
 		try {
-			manager = EntityManagerProducer.getEntityManager();
 			CriteriaQuery<E> query = manager.getCriteriaBuilder().createQuery(entidadeClasse);
 			query.from(entidadeClasse);
 			return manager.createQuery(query).getResultList();
 		} catch (RuntimeException e) {
 			throw e;
-		}finally{
-			manager.clear();
-			manager.close();
 		}
 	}
 
 	@Override
 	public E obterPorId(Long id) {
 		try {
-			manager = EntityManagerProducer.getEntityManager();
 			return manager.find(entidadeClasse, id);
 		} catch (RuntimeException e) {
 			throw e;
-		}finally{
-			manager.clear();
-			manager.close();
 		}
 	}
-
 }
