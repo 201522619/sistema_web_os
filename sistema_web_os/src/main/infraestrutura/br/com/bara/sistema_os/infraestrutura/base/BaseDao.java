@@ -1,4 +1,4 @@
-package br.com.bara.sistema_os.infraestrutura;
+package br.com.bara.sistema_os.infraestrutura.base;
 
 import java.util.List;
 
