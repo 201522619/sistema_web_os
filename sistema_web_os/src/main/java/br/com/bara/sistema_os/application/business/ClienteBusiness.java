@@ -8,7 +8,7 @@ import javax.inject.Named;
 
 import br.com.bara.sistema_os.application.dao.PessoaDao;
 import br.com.bara.sistema_os.application.domain.Pessoa;
-import br.com.bara.sistema_os.infraestrutura.interceptors.Transactional;
+import br.com.bara.sistema_os.infraestrutura.interceptor.Transactional;
 
 @Named
 @Transactional(readOnly = true)
