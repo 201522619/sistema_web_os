@@ -1,4 +1,4 @@
-package br.com.bara.sistema_os.infraestrutura;
+package br.com.bara.sistema_os.infraestrutura.manager;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
