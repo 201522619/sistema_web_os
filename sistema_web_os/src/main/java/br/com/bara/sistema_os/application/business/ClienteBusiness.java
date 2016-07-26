@@ -11,9 +11,7 @@ import br.com.bara.sistema_os.application.domain.Pessoa;
 import br.com.bara.sistema_os.infraestrutura.interceptor.Transactional;
 
 @Named
-@Transactional(readOnly = true)
 public class ClienteBusiness implements Serializable{
-
 	private static final long serialVersionUID = 6951385777723359664L;
 	
 	@Inject
