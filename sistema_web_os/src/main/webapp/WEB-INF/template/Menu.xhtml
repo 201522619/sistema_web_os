@@ -5,16 +5,22 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 <h:form>
-
- <p:menubar>
+ 	<p:menubar>
         <p:submenu label="Cadastro" icon="ui-icon-document">
             <p:menuitem icon="ui-icon-person" outcome="cadastroPessoa" value="Cliente"/>
         </p:submenu>
  
         <f:facet name="options">
-            <p:inputText style="margin-right:10px" placeholder="Procurar"/>
+            <!-- <p:inputText style="margin-right:10px; width: 200px" placeholder="Procurar"/> -->
             <p:commandButton type="button" value="Sair do Sistema" icon="ui-icon-unlocked" />
         </f:facet>
     </p:menubar>
+    <p:dialog appendTo="@(body)" closable="false" 
+    		  draggable="false", resizable="false"
+    		  modal="true">
+    	<h:panelGrid columns="2">
+    		<p:outputLabel value=""/>
+    	</h:panelGrid>	
+    </p:dialog>
 </h:form>
 </ui:composition>

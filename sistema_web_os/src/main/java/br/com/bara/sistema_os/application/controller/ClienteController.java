@@ -20,10 +20,13 @@ import br.com.bara.sistema_os.application.domain.Pessoa;
 import br.com.bara.sistema_os.util.FacesUtil;
 
 @Named
-@ViewScoped
 public class ClienteController implements Serializable {
 
 	private static final long serialVersionUID = 5322504104014116091L;
+	
+	public ClienteController(){
+		System.out.println("Construtor ClienteController.class");
+	}
 
 	@Inject
 	private Pessoa pessoa;

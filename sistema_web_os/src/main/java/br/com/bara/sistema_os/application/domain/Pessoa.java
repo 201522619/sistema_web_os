@@ -19,6 +19,10 @@ public class Pessoa extends GenericEntity implements Serializable{
 
 	private static final long serialVersionUID = 4526125424731353784L;
 	
+	public Pessoa(){
+		System.out.println("Construtor Pessoa.class");
+	}
+	
 	@Column(name = "p_nome")
 	//@NotEmpty(message = "O nome é obrigatório!")
 	private String nome;
