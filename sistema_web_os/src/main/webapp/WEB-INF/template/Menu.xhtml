@@ -12,15 +12,14 @@
  
         <f:facet name="options">
             <!-- <p:inputText style="margin-right:10px; width: 200px" placeholder="Procurar"/> -->
-            <p:commandButton type="button" value="Sair do Sistema" icon="ui-icon-unlocked" />
+            <p:commandButton type="button" value="Sair do Sistema" icon="ui-icon-unlocked">
+            	<p:confirm header="Confirmação" message="Deseja realmente sair do sistema ?" icon="ui-icon-alert" />
+            </p:commandButton>
         </f:facet>
     </p:menubar>
-    <p:dialog appendTo="@(body)" closable="false" 
-    		  draggable="false", resizable="false"
-    		  modal="true">
-    	<h:panelGrid columns="2">
-    		<p:outputLabel value=""/>
-    	</h:panelGrid>	
-    </p:dialog>
+     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    </p:confirmDialog>
 </h:form>
 </ui:composition>

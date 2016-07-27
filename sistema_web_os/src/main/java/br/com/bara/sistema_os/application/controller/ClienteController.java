@@ -81,8 +81,6 @@ public class ClienteController implements Serializable {
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
-		}finally{
-			
 		}
 	}
 
